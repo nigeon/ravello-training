@@ -27,6 +27,7 @@ exports.createUser = function(userData) {
 exports.updateUser = function(id, userData) {
     var data = _.cloneDeep(userData);
     data = _.omit(data, '_id');
+    data = _.omit(data, '__v');
 
     var options = {
         upsert: true

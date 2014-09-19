@@ -24,6 +24,7 @@ exports.createCourse = function(courseData) {
 exports.updateCourse = function(courseId, courseData) {
     var data = _.cloneDeep(courseData);
     data = _.omit(data, '_id');
+    data = _.omit(data, '__v');
 
     return TrainingCourse.updateQ({'_id': new ObjectId(courseId)}, data, {upsert: true});
 };

@@ -48,6 +48,7 @@ exports.createClass = function(classData) {
 
 exports.updateClass = function(classId, classData) {
     var updatedClassEntity = _.omit(classData, '_id');
+    updatedClassEntity = _.omit(classData, '__v');
     return TrainingClass.updateQ({_id: new ObjectId(classId)}, updatedClassEntity, {upsert: true});
 };
 
@@ -62,6 +63,7 @@ exports.updateStudentApp = function(userId, appId) {
 
             var classData = classEntity.toJSON();
             classData = _.omit(classData, '_id');
+            classData = _.omit(classData, '__v');
             return TrainingClass.updateQ({_id: new ObjectId(classEntity.id)}, classData, {upsert: true}).then(
                 function(result) {
                     return classEntity;
@@ -82,6 +84,7 @@ exports.deleteStudentApp = function(userId, appId) {
 
             var classData = classEntity.toJSON();
             classData = _.omit(classData, '_id');
+            classData = _.omit(classData, '__v');
             return TrainingClass.updateQ({_id: new ObjectId(classEntity.id)}, classData, {upsert: true}).then(
                 function(result) {
                     return classEntity;
